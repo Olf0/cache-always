@@ -50,7 +50,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: actions/cache
-        ref: v
+        ref: v3
         path: ${{ env.PatchedCacheAction_PATH }}
 
     - name: 'Patch actions/cache'
