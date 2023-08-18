@@ -15,21 +15,6 @@ inputs:
   restore-keys:
     description: 'An ordered list of keys to use for restoring stale cache if no cache hit occurred for key. Note `cache-hit` returns false in this case.'
     required: false
-  upload-chunk-size:
-    description: 'The chunk size used to split up large files during upload, in bytes'
-    required: false
-  enableCrossOsArchive:
-    description: 'An optional boolean when enabled, allows windows runners to save or restore caches that can be restored or saved respectively on other platforms'
-    default: 'false'
-    required: false
-  fail-on-cache-miss:
-    description: 'Fail the workflow if cache entry is not found'
-    default: 'false'
-    required: false
-  lookup-only:
-    description: 'Check if a cache entry exists for the given input(s) (key, restore-keys) without downloading the cache'
-    default: 'false'
-    required: false
 
 outputs:
   cache-hit:
@@ -50,7 +35,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: actions/cache
-        ref: v
+        ref: v2
         path: ${{ env.PatchedCacheAction_PATH }}
 
     - name: 'Patch actions/cache'
@@ -63,7 +48,3 @@ runs:
         path: ${{ inputs.path }}
         key: ${{ inputs.key }}
         restore-keys: ${{ inputs.restore-keys }}
-        upload-chunk-size: ${{ inputs.upload-chunk-size }}
-        enableCrossOsArchive: ${{ inputs.enableCrossOsArchive }}
-        fail-on-cache-miss: ${{ inputs.fail-on-cache-miss }}
-        lookup-only: ${{ inputs.lookup-only }}
