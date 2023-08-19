@@ -1,7 +1,7 @@
 name: 'Update cache action clone @v?'
 # "Live patches" `action/cache@v?` to cache even when the job fails
 
-# `on:push:tags:- v?*.?*.?*` cannot be triggerd from other repositories, hence using a time-based approach.
+# `on:push:tags:- v?*.?*.?*` cannot be triggered from other repositories, hence using a time-based approach.
 on:
   schedule:
     - cron: '53 23 * * 0'
