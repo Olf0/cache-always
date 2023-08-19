@@ -61,7 +61,7 @@ runs:
 
     - name: Cache
       id: cache
-      uses: $PatchedCacheAction_PATH  # Does insist on "Expected format {org}/{repo}[/path]@ref".  Hence have to ckeck-out, alter and commit in own repo by a workflow.
+      uses: $PatchedCacheAction_PATH  # Does insist on "Expected format {org}/{repo}[/path]@ref".  Hence have to ckeck-out, alter and commit in own repo by a workflow.  Even transforming into a reusable workflow does not change that, because while it may alternatively called by "./.github/workflows/{filename}", it must reside _in the same repository_: https://docs.github.com/en/actions/using-workflows/reusing-workflows#calling-a-reusable-workflow
       with:
         path: ${{ inputs.path }}
         key: ${{ inputs.key }}
