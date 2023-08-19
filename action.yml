@@ -60,7 +60,7 @@ runs:
 
     - name: Cache
       id: cache
-      uses: ${{ env.PatchedCacheAction_PATH }}
+      uses: $PatchedCacheAction_PATH
       with:
         path: ${{ inputs.path }}
         key: ${{ inputs.key }}
