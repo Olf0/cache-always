@@ -1,0 +1,42 @@
+name: 'Update cache action clone v?'
+# "Live patches" `action/cache@v?` to cache even when the job fails
+
+# `on:push:tags:- v?*.?*.?*` cannot be trggerd from other repositories, hence using a time-based approach.
+on:
+  cron:
+
+runs:
+  using: 'composite'
+  steps:
+    # Instead of running `actions/cache@v3` directly, check it out locally and patch it.
+#    - name: Prepare
+#      run: mkdir -p $PatchedCacheAction_PATH
+#      shell: sh
+
+    - name: 'Checkout actions/cache'
+      uses: actions/checkout@v3
+      with:
+        repository: actions/cache
+        # v1, v2, v3, …:
+        ref: v?
+ #       path: ${{ env.PatchedCacheAction_PATH }}
+        sparse-checkout: |
+          dist
+          action.yml
+          LICENSE
+          package.json
+
+    - name: 'Patch actions/cache'
+      # Caches on success and failures by default, plus also on cancelled workflows if environment variable ALWAYS_SAVE_CACHE is set to 'true'.
+      run: sed -i "s/ \('\?\)success()\1\$/ \${{ \1success()\1 || \1failure()\1/ || env.ALWAYS_SAVE_CACHE == 'true' }}" action.yml
+      shell: sh
+
+    - name: 'Add and commit'
+      uses: EndBug/add-and-commit@v9
+        with:
+          # add: '-A doc/generated'
+          # fetch: false
+          newbranch: v?
+          author_name: 'Github Action Runner'
+          author_email: 'noreply@github.com'
+          message: "[Actions] Generated Documentation for ${{ github.ref_name }}"
