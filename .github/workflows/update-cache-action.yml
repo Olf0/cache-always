@@ -1,4 +1,4 @@
-name: 'Update cache action clone v?'
+name: 'Update cache action clone @v?'
 # "Live patches" `action/cache@v?` to cache even when the job fails
 
 # `on:push:tags:- v?*.?*.?*` cannot be triggerd from other repositories, hence using a time-based approach.
