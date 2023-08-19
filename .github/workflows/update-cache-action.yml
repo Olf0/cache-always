@@ -1,7 +1,7 @@
-name: 'Update cache action clone v?'
-# "Live patches" `action/cache@v?` to cache even when the job fails
+name: 'Update cache action clone v1'
+# "Live patches" `action/cache@v1` to cache even when the job fails
 
-# `on:push:tags:- v?*.?*.?*` cannot be triggerd from other repositories, hence using a time-based approach.
+# `on:push:tags:- v1.?*.?*` cannot be triggerd from other repositories, hence using a time-based approach.
 on:
   schedule:
     - cron: '53 23 * * 0'
@@ -21,7 +21,7 @@ runs:
       with:
         repository: actions/cache
         # v1, v2, v3, …:
-        ref: v?
+        ref: v1
  #       path: ${{ env.PatchedCacheAction_PATH }}
         sparse-checkout: |
           dist
@@ -39,7 +39,7 @@ runs:
         with:
           # add: '-A doc/generated'
           # fetch: false
-          newbranch: v?
+          newbranch: v1
           author_name: 'Github Action Runner'
           author_email: 'noreply@github.com'
           message: "[Actions] Generated Documentation for ${{ github.ref_name }}"
