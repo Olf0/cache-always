@@ -27,6 +27,7 @@ runs:
           dist
           action.yml
           LICENSE
+          README.md
           package.json
 
     - name: 'Patch actions/cache'
